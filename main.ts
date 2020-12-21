@@ -1,3 +1,23 @@
+sprites.onCreated(SpriteKind.Enemy, function (sprite) {
+    myEnemy = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . a a a a a . . . . . . . 
+        . . . . a a a a a . . . . . . . 
+        . . . . a a a a a . . . . . . . 
+        . . . . a a a a a . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
         mySprite.vy += -200
@@ -6,7 +26,35 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.over(false)
 })
+controller.player2.onEvent(ControllerEvent.Connected, function () {
+    mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . e e e e e e e e . . . . . 
+        . . . e e f d f d d . . . . . . 
+        . . . d d d d d d d . . . . . . 
+        . . . d d d d d d d . . . . . . 
+        . . . d f d d d f d . . . . . . 
+        . . . d d f f f d d . . . . . . 
+        . . . d d d d d d d . . . . . . 
+        . . . . d d d d d . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    controller.player2.moveSprite(mySprite2)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 5))
+    mySprite.ay = 500
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        mySprite.vy += -200
+    }
+})
 let projectile: Sprite = null
+let mySprite2: Sprite = null
+let myEnemy: Sprite = null
 let mySprite: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
     . . . . . . . . . . 
