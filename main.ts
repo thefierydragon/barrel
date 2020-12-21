@@ -52,6 +52,20 @@ game.onUpdateInterval(2000, function () {
     tiles.placeOnTile(projectile, tiles.getTileLocation(9, 5))
     info.changeScoreBy(1)
 })
+game.onUpdateInterval(3300, function () {
+    projectile = sprites.createProjectileFromSide(img`
+        1 8 8 1 1 8 8 1 
+        8 8 8 8 8 8 8 8 
+        8 8 8 8 8 8 8 8 
+        1 8 8 1 1 8 8 1 
+        1 8 8 1 1 8 8 1 
+        8 8 8 8 8 8 8 8 
+        8 8 8 8 8 8 8 8 
+        1 8 8 1 1 8 8 1 
+        `, randint(-100, -80), 0)
+    tiles.placeOnTile(projectile, tiles.getTileLocation(9, 5))
+    info.changeScoreBy(1)
+})
 forever(function () {
     music.playMelody("C F E F D G E F ", 120)
 })
